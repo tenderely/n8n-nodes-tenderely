@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-tenderely",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Tenderely BPM nodes for n8n: instant record triggers, create/update/find records and complete process steps.",
   "keywords": [
     "n8n-community-node-package",
