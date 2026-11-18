@@ -1,0 +1,101 @@
+{
+  "name": "Complete a Tenderely approval step when a payment is confirmed",
+  "nodes": [
+    {
+      "id": "860b924f-ebce-4348-ab2e-2a290f5bf44f",
+      "name": "Payment confirmed",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "9c56e828-0be6-4813-bc66-46209db47b65",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "payment-confirmed",
+        "options": {}
+      }
+    },
+    {
+      "id": "7fa1707c-a951-4318-8c2b-4428ebb897c1",
+      "name": "Find order",
+      "type": "n8n-nodes-tenderely.tenderely",
+      "typeVersion": 1,
+      "position": [
+        260,
+        0
+      ],
+      "credentials": {
+        "tenderelyApi": {
+          "id": "",
+          "name": "Tenderely account"
+        }
+      },
+      "parameters": {
+        "resource": "record",
+        "operation": "getMany",
+        "formId": "",
+        "limit": 1,
+        "filters": {
+          "fieldKey": "",
+          "value": "={{ $json.body.order_number }}"
+        }
+      },
+      "notes": "Choose your form and the field that holds the order number."
+    },
+    {
+      "id": "2defbf30-4edc-42eb-8013-eafcf0b1f3d1",
+      "name": "Approve payment step",
+      "type": "n8n-nodes-tenderely.tenderely",
+      "typeVersion": 1,
+      "position": [
+        520,
+        0
+      ],
+      "credentials": {
+        "tenderelyApi": {
+          "id": "",
+          "name": "Tenderely account"
+        }
+      },
+      "parameters": {
+        "resource": "record",
+        "operation": "completeStep",
+        "formId": "={{ $json.form_id }}",
+        "recordId": "={{ $json.id }}",
+        "decision": "approve",
+        "comment": "=Payment {{ $('Payment confirmed').item.json.body.payment_id }} confirmed"
+      }
+    }
+  ],
+  "connections": {
+    "Payment confirmed": {
+      "main": [
+        [
+          {
+            "node": "Find order",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find order": {
+      "main": [
+        [
+          {
+            "node": "Approve payment step",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

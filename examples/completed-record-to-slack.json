@@ -1,0 +1,64 @@
+{
+  "name": "Post completed Tenderely records to Slack",
+  "nodes": [
+    {
+      "id": "59506d88-95e8-4d7f-9486-6a64c7f0714e",
+      "name": "Record completed",
+      "type": "n8n-nodes-tenderely.tenderelyTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "34fefc40-0f99-4fae-8c5c-4b5f02003db2",
+      "credentials": {
+        "tenderelyApi": {
+          "id": "",
+          "name": "Tenderely account"
+        }
+      },
+      "parameters": {
+        "event": "record.completed",
+        "formId": ""
+      }
+    },
+    {
+      "id": "9b6ed51b-c025-4b9f-a9b0-6aa79ebea28a",
+      "name": "Send Slack message",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        260,
+        0
+      ],
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "text": "=Completed: {{ $json.title }} ({{ $json.form_name }})\n{{ $json.url }}",
+        "otherOptions": {}
+      }
+    }
+  ],
+  "connections": {
+    "Record completed": {
+      "main": [
+        [
+          {
+            "node": "Send Slack message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

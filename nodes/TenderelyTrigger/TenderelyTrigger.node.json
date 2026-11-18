@@ -1,0 +1,10 @@
+{
+  "node": "n8n-nodes-tenderely.tenderelyTrigger",
+  "nodeVersion": "1.0",
+  "codexVersion": "1.0",
+  "categories": ["Productivity", "Data & Storage"],
+  "resources": {
+    "credentialDocumentation": [{ "url": "https://tenderely.com/developers/#n8n" }],
+    "primaryDocumentation": [{ "url": "https://tenderely.com/developers/#n8n" }]
+  }
+}

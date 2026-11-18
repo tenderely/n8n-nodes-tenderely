@@ -1,0 +1,79 @@
+{
+  "name": "Create a Tenderely record from a form submission",
+  "nodes": [
+    {
+      "id": "8f42581b-0cd9-40de-beb1-baccbe673b6e",
+      "name": "On form submission",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "bb6fe339-adc6-4184-b867-37da2521fdd0",
+      "parameters": {
+        "formTitle": "Service request",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Quantity",
+              "fieldType": "number"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "c4895d73-7dc2-4a1f-8152-a4e7c9db6d17",
+      "name": "Create record",
+      "type": "n8n-nodes-tenderely.tenderely",
+      "typeVersion": 1,
+      "position": [
+        260,
+        0
+      ],
+      "credentials": {
+        "tenderelyApi": {
+          "id": "",
+          "name": "Tenderely account"
+        }
+      },
+      "parameters": {
+        "resource": "record",
+        "operation": "create",
+        "formId": "",
+        "title": "=Request from {{ $json.Email }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": []
+        }
+      },
+      "notes": "Choose your form, then map the form answers to its fields."
+    }
+  ],
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Create record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

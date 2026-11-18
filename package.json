@@ -1,0 +1,64 @@
+{
+  "name": "n8n-nodes-tenderely",
+  "version": "1.0.0",
+  "description": "Tenderely BPM nodes for n8n: instant record triggers, create/update/find records and complete process steps.",
+  "keywords": [
+    "n8n-community-node-package",
+    "tenderely",
+    "bpm",
+    "workflow",
+    "forms"
+  ],
+  "license": "MIT",
+  "homepage": "https://tenderely.com/developers/",
+  "author": {
+    "name": "Tenderely Global LLC",
+    "email": "huseyin@tenderely.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tenderely/n8n-nodes-tenderely.git"
+  },
+  "engines": {
+    "node": ">=20.15"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "n8n-node build",
+    "build:watch": "tsc --watch",
+    "dev": "n8n-node dev",
+    "lint": "n8n-node lint",
+    "lint:fix": "n8n-node lint --fix",
+    "test": "n8n-node build && node --test test/*.test.js",
+    "release": "n8n-node release",
+    "prepublishOnly": "n8n-node prerelease"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "strict": true,
+    "credentials": [
+      "dist/credentials/TenderelyApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/Tenderely/Tenderely.node.js",
+      "dist/nodes/TenderelyTrigger/TenderelyTrigger.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@n8n/node-cli": "0.57.4",
+    "eslint": "9.39.4",
+    "n8n-workflow": "2.48.3",
+    "prettier": "3.8.3",
+    "release-it": "20.2.0",
+    "typescript": "5.9.3"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/tenderely/n8n-nodes-tenderely/issues"
+  }
+}
