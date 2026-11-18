@@ -60,5 +60,8 @@
   },
   "bugs": {
     "url": "https://github.com/tenderely/n8n-nodes-tenderely/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
